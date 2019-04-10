@@ -1,3 +1,7 @@
+//! # minigrep
+//!
+//! `minigrep` is a collection of utilities to search for a string in a given document
+
 use std::error::Error;
 use std::fs;
 use std::env;
@@ -43,6 +47,20 @@ impl Config {
     }
 }
 
+/// Searches the contents for the given string
+///
+/// # Examples
+///
+/// ```
+/// let query = "frog";
+///
+/// let contents = "\
+/// this line contains frog,
+/// this line does not.";
+///
+/// assert_eq!(vec!["this line contains frog,"],
+/// minigrep::search(query, contents));
+/// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents.lines()
         .filter(|line| line.contains(query))
